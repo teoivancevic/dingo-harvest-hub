@@ -1,5 +1,4 @@
-
-import { Wheat, Corn, Apple, Tractor, SeedingOutline } from "lucide-react";
+import { Wheat, Corn, Apple, Tractor } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface CropInfo {
@@ -8,7 +7,7 @@ interface CropInfo {
   description: string;
 }
 
-const SeedingOutline = ({ className, size = 24 }: { className?: string; size?: number }) => (
+const CustomSeedingIcon = ({ className, size = 24 }: { className?: string; size?: number }) => (
   <svg 
     xmlns="http://www.w3.org/2000/svg" 
     width={size} 
@@ -40,7 +39,7 @@ const Agriculture = () => {
       description: "Posebna vrsta pšenice idealna za proizvodnju tjestenine i posebnih vrsta brašna."
     },
     {
-      icon: SeedingOutline,
+      icon: CustomSeedingIcon,
       name: "Grah",
       description: "Uzgajamo nekoliko sorti graha na naš tradicionalni način, pazeći na kvalitetu i okus."
     },
@@ -60,7 +59,6 @@ const Agriculture = () => {
     <section id="agriculture" className="section-spacing bg-white">
       <div className="container mx-auto container-padding">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          {/* Content Column */}
           <div>
             <div className="space-y-6">
               <div className="inline-block px-3 py-1 rounded-full bg-dingo-cream text-dingo-green text-sm font-medium mb-4">
@@ -102,7 +100,6 @@ const Agriculture = () => {
             </div>
           </div>
 
-          {/* Image Column */}
           <div className="relative">
             <div className="rounded-2xl overflow-hidden shadow-xl">
               <img 
