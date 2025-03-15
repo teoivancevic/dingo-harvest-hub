@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Wheat, Cherry, Popcorn, ShoppingCart } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -148,83 +149,77 @@ const Products = () => {
                 <h3 className="text-2xl font-serif font-semibold text-dingo-dark mb-3 text-center md:text-left">
                   Brašna
                 </h3>
-                <p className="text-lg text-dingo-dark/80 text-center md:text-left">
+                <p className="text-lg text-dingo-dark/80 text-center md:text-left mb-8">
                   Različiti tipovi brašna mljeveni na kamenom mlinu koji čuva hranjive tvari i prirodni okus žitarica.
                 </p>
-              </div>
-            </div>
+                
+                <div className="space-y-6 mt-4">
+                  <div className="overflow-x-auto pb-4">
+                    <ToggleGroup 
+                      type="single" 
+                      value={selectedGrain || ""} 
+                      onValueChange={(value) => setSelectedGrain(value || null)}
+                      className="inline-flex flex-nowrap gap-3 min-w-max"
+                    >
+                      {flourGrains.map((grain) => (
+                        <ToggleGroupItem 
+                          key={grain.id} 
+                          value={grain.id} 
+                          className={cn(
+                            "flex items-center gap-2 border border-gray-200 rounded-full py-1 px-4 transition-all",
+                            "data-[state=on]:bg-dingo-green data-[state=on]:text-white data-[state=on]:border-dingo-green",
+                            "hover:border-dingo-green"
+                          )}
+                        >
+                          <div className="w-6 h-6 rounded-full overflow-hidden flex-shrink-0">
+                            <img 
+                              src={grain.image} 
+                              alt={grain.name} 
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                          <span className="text-sm whitespace-nowrap">{grain.name}</span>
+                        </ToggleGroupItem>
+                      ))}
+                    </ToggleGroup>
+                  </div>
 
-            <div className="bg-white rounded-xl p-6 shadow-md">
-              <div className="mb-8">
-                <h4 className="text-lg font-medium text-dingo-dark mb-4">Odaberite vrstu žitarice:</h4>
-                <div className="overflow-x-auto pb-4">
-                  <ToggleGroup 
-                    type="single" 
-                    value={selectedGrain || ""} 
-                    onValueChange={(value) => setSelectedGrain(value || null)}
-                    className="inline-flex flex-nowrap gap-3 min-w-max"
-                  >
-                    {flourGrains.map((grain) => (
-                      <ToggleGroupItem 
-                        key={grain.id} 
-                        value={grain.id} 
-                        className={cn(
-                          "flex items-center gap-2 border border-gray-200 rounded-full py-1 px-4 transition-all",
-                          "data-[state=on]:bg-dingo-green data-[state=on]:text-white data-[state=on]:border-dingo-green",
-                          "hover:border-dingo-green"
-                        )}
+                  <div className="overflow-x-auto pb-4">
+                    <ToggleGroup 
+                      type="single" 
+                      value={selectedProcessType || ""} 
+                      onValueChange={(value) => setSelectedProcessType(value || null)}
+                      className="inline-flex flex-nowrap gap-3"
+                    >
+                      {flourProcessTypes.map((type) => (
+                        <ToggleGroupItem 
+                          key={type.id} 
+                          value={type.id} 
+                          className={cn(
+                            "border border-gray-200 rounded-full py-1 px-4 transition-all",
+                            "data-[state=on]:bg-dingo-green data-[state=on]:text-white data-[state=on]:border-dingo-green",
+                            "hover:border-dingo-green"
+                          )}
+                        >
+                          <span className="text-sm">{type.name}</span>
+                        </ToggleGroupItem>
+                      ))}
+                    </ToggleGroup>
+                  </div>
+
+                  {selectedGrain && selectedProcessType && (
+                    <div className="animate-fadeIn">
+                      <Button 
+                        onClick={handleBuy}
+                        className="bg-dingo-green hover:bg-dingo-green/90 text-white rounded-full"
                       >
-                        <div className="w-6 h-6 rounded-full overflow-hidden flex-shrink-0">
-                          <img 
-                            src={grain.image} 
-                            alt={grain.name} 
-                            className="w-full h-full object-cover"
-                          />
-                        </div>
-                        <span className="text-sm whitespace-nowrap">{grain.name}</span>
-                      </ToggleGroupItem>
-                    ))}
-                  </ToggleGroup>
+                        <ShoppingCart className="w-4 h-4 mr-2" />
+                        Dodaj u košaricu
+                      </Button>
+                    </div>
+                  )}
                 </div>
               </div>
-
-              <div className="mb-8">
-                <h4 className="text-lg font-medium text-dingo-dark mb-4">Odaberite tip mljevenja:</h4>
-                <div className="overflow-x-auto pb-4">
-                  <ToggleGroup 
-                    type="single" 
-                    value={selectedProcessType || ""} 
-                    onValueChange={(value) => setSelectedProcessType(value || null)}
-                    className="inline-flex flex-nowrap gap-3"
-                  >
-                    {flourProcessTypes.map((type) => (
-                      <ToggleGroupItem 
-                        key={type.id} 
-                        value={type.id} 
-                        className={cn(
-                          "border border-gray-200 rounded-full py-1 px-4 transition-all",
-                          "data-[state=on]:bg-dingo-green data-[state=on]:text-white data-[state=on]:border-dingo-green",
-                          "hover:border-dingo-green"
-                        )}
-                      >
-                        <span className="text-sm">{type.name}</span>
-                      </ToggleGroupItem>
-                    ))}
-                  </ToggleGroup>
-                </div>
-              </div>
-
-              {selectedGrain && selectedProcessType && (
-                <div className="flex justify-center animate-fadeIn">
-                  <Button 
-                    onClick={handleBuy}
-                    className="bg-dingo-green hover:bg-dingo-green/90 text-white rounded-full"
-                  >
-                    <ShoppingCart className="w-4 h-4 mr-2" />
-                    Dodaj u košaricu
-                  </Button>
-                </div>
-              )}
             </div>
           </div>
 
