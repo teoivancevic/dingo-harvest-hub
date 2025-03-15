@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 type ProductCategoryType = {
   icon: React.ComponentType<{ className?: string }>;
@@ -140,7 +141,7 @@ const Products = () => {
         </div>
 
         <div className="space-y-24">
-          <div className="space-y-12">
+          <div className="space-y-8">
             <div className="flex flex-col md:flex-row items-center md:items-start gap-6 max-w-4xl mx-auto">
               <div className="flex-shrink-0 w-16 h-16 bg-dingo-green/10 rounded-xl flex items-center justify-center">
                 <Wheat className="w-8 h-8 text-dingo-green" />
@@ -149,71 +150,72 @@ const Products = () => {
                 <h3 className="text-2xl font-serif font-semibold text-dingo-dark mb-3 text-center md:text-left">
                   Brašna
                 </h3>
-                <p className="text-lg text-dingo-dark/80 text-center md:text-left mb-8">
+                <p className="text-lg text-dingo-dark/80 text-center md:text-left mb-4">
                   Različiti tipovi brašna mljeveni na kamenom mlinu koji čuva hranjive tvari i prirodni okus žitarica.
                 </p>
                 
-                <div className="space-y-6 mt-4">
-                  <div className="overflow-x-auto pb-4">
+                <div className="space-y-3 mt-2">
+                  <ScrollArea className="w-full pb-1">
                     <ToggleGroup 
                       type="single" 
                       value={selectedGrain || ""} 
                       onValueChange={(value) => setSelectedGrain(value || null)}
-                      className="inline-flex flex-nowrap gap-3 min-w-max"
+                      className="inline-flex flex-nowrap gap-2 min-w-max"
                     >
                       {flourGrains.map((grain) => (
                         <ToggleGroupItem 
                           key={grain.id} 
                           value={grain.id} 
                           className={cn(
-                            "flex items-center gap-2 border border-gray-200 rounded-full py-1 px-4 transition-all",
+                            "flex items-center gap-1.5 border border-gray-200 rounded-full py-1 px-3 transition-all",
                             "data-[state=on]:bg-dingo-green data-[state=on]:text-white data-[state=on]:border-dingo-green",
                             "hover:border-dingo-green"
                           )}
                         >
-                          <div className="w-6 h-6 rounded-full overflow-hidden flex-shrink-0">
+                          <div className="w-5 h-5 rounded-full overflow-hidden flex-shrink-0">
                             <img 
                               src={grain.image} 
                               alt={grain.name} 
                               className="w-full h-full object-cover"
                             />
                           </div>
-                          <span className="text-sm whitespace-nowrap">{grain.name}</span>
+                          <span className="text-xs whitespace-nowrap">{grain.name}</span>
                         </ToggleGroupItem>
                       ))}
                     </ToggleGroup>
-                  </div>
+                  </ScrollArea>
 
-                  <div className="overflow-x-auto pb-4">
+                  <ScrollArea className="w-full pb-1">
                     <ToggleGroup 
                       type="single" 
                       value={selectedProcessType || ""} 
                       onValueChange={(value) => setSelectedProcessType(value || null)}
-                      className="inline-flex flex-nowrap gap-3"
+                      className="inline-flex flex-nowrap gap-2"
                     >
                       {flourProcessTypes.map((type) => (
                         <ToggleGroupItem 
                           key={type.id} 
                           value={type.id} 
                           className={cn(
-                            "border border-gray-200 rounded-full py-1 px-4 transition-all",
+                            "border border-gray-200 rounded-full py-1 px-3 transition-all",
                             "data-[state=on]:bg-dingo-green data-[state=on]:text-white data-[state=on]:border-dingo-green",
-                            "hover:border-dingo-green"
+                            "hover:border-dingo-green",
+                            "text-xs"
                           )}
                         >
-                          <span className="text-sm">{type.name}</span>
+                          <span className="whitespace-nowrap">{type.name}</span>
                         </ToggleGroupItem>
                       ))}
                     </ToggleGroup>
-                  </div>
+                  </ScrollArea>
 
                   {selectedGrain && selectedProcessType && (
                     <div className="animate-fadeIn">
                       <Button 
                         onClick={handleBuy}
-                        className="bg-dingo-green hover:bg-dingo-green/90 text-white rounded-full"
+                        className="bg-dingo-green hover:bg-dingo-green/90 text-white rounded-full text-sm mt-1"
                       >
-                        <ShoppingCart className="w-4 h-4 mr-2" />
+                        <ShoppingCart className="w-3.5 h-3.5 mr-1.5" />
                         Dodaj u košaricu
                       </Button>
                     </div>
