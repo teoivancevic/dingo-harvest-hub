@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -22,9 +22,8 @@ const Header = () => {
   const navLinks = [
     { name: "O nama", href: "#about" },
     { name: "Proizvodi", href: "#products" },
-    { name: "Poljoprivreda", href: "#agriculture" },
-    { name: "Gdje nas pronaći", href: "#find-us" },
-    { name: "Budući planovi", href: "#future" },
+    { name: "Uzgoj", href: "#agriculture" },
+    { name: "Kontakt", href: "#contact" },
   ];
 
   return (
@@ -40,7 +39,7 @@ const Header = () => {
       <div 
         className={cn(
           "container mx-auto flex items-center justify-between",
-          !isMobile && "bg-white/90 backdrop-blur-md shadow-md rounded-full px-8 max-w-5xl"
+          !isMobile && "bg-white/95 backdrop-blur-md shadow-md rounded-full px-8 py-4 max-w-5xl"
         )}
       >
         <a 
@@ -65,9 +64,12 @@ const Header = () => {
           ))}
           <Button 
             asChild 
-            className="bg-dingo-green hover:bg-dingo-green/90 text-white font-medium"
+            className="bg-dingo-green hover:bg-dingo-green/90 text-white font-medium px-6 rounded-full"
           >
-            <a href="#contact">Kontakt</a>
+            <a href="https://dingo.hr" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+              <span>Webshop</span>
+              <ShoppingCart size={16} />
+            </a>
           </Button>
         </nav>
 
@@ -101,13 +103,16 @@ const Header = () => {
           ))}
           <Button 
             asChild 
-            className="bg-dingo-green hover:bg-dingo-green/90 text-white font-medium w-full"
+            className="bg-dingo-green hover:bg-dingo-green/90 text-white font-medium w-full flex items-center justify-center gap-2"
           >
             <a 
-              href="#contact"
+              href="https://dingo.hr"
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => setIsMenuOpen(false)}
             >
-              Kontakt
+              <span>Webshop</span>
+              <ShoppingCart size={16} />
             </a>
           </Button>
         </nav>

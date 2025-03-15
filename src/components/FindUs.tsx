@@ -1,9 +1,9 @@
-
 import { Store, ShoppingBag, Globe, MapPin } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { LucideIcon } from "lucide-react";
 
 interface SalesChannel {
-  icon: React.FC<{ className?: string; size?: number }>;
+  icon: LucideIcon;
   title: string;
   description: string;
 }

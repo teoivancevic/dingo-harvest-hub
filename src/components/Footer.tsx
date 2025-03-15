@@ -1,5 +1,5 @@
 
-import { Facebook, Instagram, Twitter, Linkedin } from "lucide-react";
+import { Facebook, Instagram, Twitter, Linkedin, Mail, Phone, MapPin } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const Footer = () => {
@@ -23,7 +23,7 @@ const Footer = () => {
       title: "Tvrtka",
       links: [
         { label: "O nama", href: "#about" },
-        { label: "Poljoprivreda", href: "#agriculture" },
+        { label: "Uzgoj", href: "#agriculture" },
         { label: "Budući planovi", href: "#future" }
       ]
     },
@@ -34,6 +34,27 @@ const Footer = () => {
         { label: "Kontakt", href: "#contact" },
         { label: "Webshop", href: "https://dingo.hr" }
       ]
+    }
+  ];
+
+  const contactInfo = [
+    {
+      icon: Mail,
+      title: "Email",
+      details: "info@dingo.hr",
+      link: "mailto:info@dingo.hr"
+    },
+    {
+      icon: Phone,
+      title: "Telefon",
+      details: "+385 1 234 5678",
+      link: "tel:+38512345678"
+    },
+    {
+      icon: MapPin,
+      title: "Adresa",
+      details: "Slavonska ulica 123, Osijek, Hrvatska",
+      link: "https://maps.google.com/?q=Osijek,Croatia"
     }
   ];
 
@@ -49,6 +70,24 @@ const Footer = () => {
             <p className="text-white/80 mb-6 max-w-md">
               Hrvatska tvrtka posvećena proizvodnji visokokvalitetnih prehrambenih proizvoda od domaćih sirovina. Naša misija je doprinijeti zadržavanju repromaterijala u Hrvatskoj.
             </p>
+            
+            {/* Contact Information */}
+            <div className="space-y-4 mb-6">
+              {contactInfo.map((info, index) => (
+                <div key={index} className="flex items-center gap-3">
+                  <info.icon className="w-5 h-5 text-dingo-wheat" />
+                  <a 
+                    href={info.link} 
+                    className="text-white/80 hover:text-white transition-colors"
+                    target={info.icon === MapPin ? "_blank" : undefined}
+                    rel={info.icon === MapPin ? "noopener noreferrer" : undefined}
+                  >
+                    {info.details}
+                  </a>
+                </div>
+              ))}
+            </div>
+            
             <div className="flex space-x-4">
               {socialLinks.map((social, index) => (
                 <a

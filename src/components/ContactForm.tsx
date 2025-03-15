@@ -42,26 +42,26 @@ const ContactForm = () => {
     }, 1000);
   };
 
-  const contactInfo = [
-    {
+  const contactInfo = {
+    email: {
       icon: Mail,
       title: "Email",
       details: "info@dingo.hr",
       link: "mailto:info@dingo.hr"
     },
-    {
+    phone: {
       icon: Phone,
       title: "Telefon",
       details: "+385 1 234 5678",
       link: "tel:+38512345678"
     },
-    {
+    address: {
       icon: MapPin,
       title: "Adresa",
       details: "Slavonska ulica 123, Osijek, Hrvatska",
       link: "https://maps.google.com/?q=Osijek,Croatia"
     }
-  ];
+  };
 
   return (
     <section id="contact" className="section-spacing bg-dingo-cream">
@@ -163,39 +163,52 @@ const ContactForm = () => {
             </form>
           </div>
 
-          {/* Contact Information */}
+          {/* Map and Contact Information */}
           <div className="flex flex-col gap-8">
-            {contactInfo.map((info, index) => (
-              <div 
-                key={index} 
-                className={cn(
-                  "bg-white rounded-xl shadow-md p-8 opacity-0 animate-slideLeft",
-                  "transition-all duration-300"
-                )}
-                style={{animationDelay: `${0.2 + index * 0.1}s`}}
-              >
-                <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4">
-                  <div className="flex-shrink-0 w-12 h-12 bg-dingo-green/10 rounded-full flex items-center justify-center">
-                    <info.icon className="w-6 h-6 text-dingo-green" />
-                  </div>
-                  <div className="text-center sm:text-left">
-                    <h4 className="text-lg font-serif font-semibold text-dingo-dark mb-2">
-                      {info.title}
-                    </h4>
-                    <a 
-                      href={info.link} 
-                      className="text-dingo-dark/80 hover:text-dingo-green transition-colors"
-                      target={info.icon === MapPin ? "_blank" : undefined}
-                      rel={info.icon === MapPin ? "noopener noreferrer" : undefined}
-                    >
-                      {info.details}
-                    </a>
-                  </div>
-                </div>
+            <div className="bg-white rounded-xl shadow-md p-8">
+              <h3 className="text-2xl font-serif font-semibold text-dingo-dark mb-6">
+                Gdje nas pronaći
+              </h3>
+              
+              <div className="relative w-full h-64 rounded-lg overflow-hidden mb-6">
+                <iframe 
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d178991.09646583367!2d18.530732658266155!3d45.54913323397376!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x475ce7a869728075%3A0x5b8c725621a41195!2sOsijek!5e0!3m2!1sen!2shr!4v1656772143791!5m2!1sen!2shr" 
+                  width="100%" 
+                  height="100%" 
+                  style={{ border: 0 }} 
+                  allowFullScreen 
+                  loading="lazy" 
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="DINGO lokacija"
+                  className="absolute inset-0"
+                ></iframe>
               </div>
-            ))}
+              
+              <div className="space-y-4">
+                {Object.values(contactInfo).map((info, index) => (
+                  <div key={index} className="flex items-start gap-4">
+                    <div className="flex-shrink-0 w-10 h-10 bg-dingo-green/10 rounded-full flex items-center justify-center">
+                      <info.icon className="w-5 h-5 text-dingo-green" />
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-serif font-semibold text-dingo-dark mb-1">
+                        {info.title}
+                      </h4>
+                      <a 
+                        href={info.link} 
+                        className="text-dingo-dark/80 hover:text-dingo-green transition-colors"
+                        target={info.icon === MapPin ? "_blank" : undefined}
+                        rel={info.icon === MapPin ? "noopener noreferrer" : undefined}
+                      >
+                        {info.details}
+                      </a>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
 
-            <div className="bg-dingo-green rounded-xl shadow-md p-8 text-white opacity-0 animate-slideLeft" style={{animationDelay: "0.5s"}}>
+            <div className="bg-dingo-green rounded-xl shadow-md p-8 text-white">
               <h4 className="text-xl font-serif font-semibold mb-4">
                 Radno vrijeme
               </h4>
