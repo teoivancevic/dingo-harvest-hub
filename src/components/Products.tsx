@@ -1,9 +1,12 @@
-
-import { Wheat, Cherry, Popcorn } from "lucide-react";
+import { useState } from "react";
+import { Wheat, Cherry, Popcorn, ShoppingCart } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
-interface ProductCategory {
-  icon: React.FC<{ className?: string; size?: number }>;
+type ProductCategoryType = {
+  icon: React.ComponentType<{ className?: string }>;
   title: string;
   description: string;
   items: {
@@ -11,31 +14,64 @@ interface ProductCategory {
     description: string;
     image: string;
   }[];
+};
+
+interface FlourGrainType {
+  id: string;
+  name: string;
+  image: string;
+}
+
+interface FlourProcessType {
+  id: string;
+  name: string;
 }
 
 const Products = () => {
-  const productCategories: ProductCategory[] = [
+  const [selectedGrain, setSelectedGrain] = useState<string | null>(null);
+  const [selectedProcessType, setSelectedProcessType] = useState<string | null>(null);
+
+  const flourGrains: FlourGrainType[] = [
+    {
+      id: "pir",
+      name: "Pirovo brašno",
+      image: "https://images.unsplash.com/photo-1586444248902-2f64eddc13df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+    },
+    {
+      id: "psenica",
+      name: "Pšenično brašno",
+      image: "https://images.unsplash.com/photo-1551462147-ff29053bfc14?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+    },
+    {
+      id: "durum",
+      name: "Durum brašno",
+      image: "https://images.unsplash.com/photo-1568254183919-78a4f43a2877?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+    },
+    {
+      id: "kukuruz",
+      name: "Kukuruzno brašno",
+      image: "https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+    },
+    {
+      id: "krupica",
+      name: "Kukuruzna krupica (pura)",
+      image: "https://images.unsplash.com/photo-1563636619-e9143da7973b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+    }
+  ];
+
+  const flourProcessTypes: FlourProcessType[] = [
+    { id: "glatko", name: "Glatko" },
+    { id: "ostro", name: "Oštro" },
+    { id: "krupica", name: "Krupica" },
+    { id: "mekinje", name: "Mekinje" }
+  ];
+
+  const productCategories: ProductCategoryType[] = [
     {
       icon: Wheat,
       title: "Brašna",
       description: "Različiti tipovi brašna mljeveni na kamenom mlinu koji čuva hranjive tvari i prirodni okus žitarica.",
-      items: [
-        {
-          name: "Pirovo brašno",
-          description: "Glatko pirovo brašno bogato proteinima i mineralima, idealno za pekarstvo.",
-          image: "https://images.unsplash.com/photo-1586444248902-2f64eddc13df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
-        },
-        {
-          name: "Pšenično brašno",
-          description: "Tradicionalno pšenično brašno idealno za sve vrste pekarskih proizvoda.",
-          image: "https://images.unsplash.com/photo-1551462147-ff29053bfc14?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
-        },
-        {
-          name: "Durum brašno",
-          description: "Posebno brašno idealno za izradu tjestenine i posebnih vrsta kruha.",
-          image: "https://images.unsplash.com/photo-1568254183919-78a4f43a2877?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
-        }
-      ]
+      items: []
     },
     {
       icon: Cherry,
@@ -83,6 +119,10 @@ const Products = () => {
     }
   ];
 
+  const handleBuy = () => {
+    window.open("https://webshop.dingo.hr", "_blank");
+  };
+
   return (
     <section id="products" className="section-spacing bg-dingo-cream clip-section">
       <div className="container mx-auto container-padding">
@@ -99,7 +139,96 @@ const Products = () => {
         </div>
 
         <div className="space-y-24">
-          {productCategories.map((category, categoryIndex) => (
+          <div className="space-y-12">
+            <div className="flex flex-col md:flex-row items-center md:items-start gap-6 max-w-4xl mx-auto">
+              <div className="flex-shrink-0 w-16 h-16 bg-dingo-green/10 rounded-xl flex items-center justify-center">
+                <Wheat className="w-8 h-8 text-dingo-green" />
+              </div>
+              <div>
+                <h3 className="text-2xl font-serif font-semibold text-dingo-dark mb-3 text-center md:text-left">
+                  Brašna
+                </h3>
+                <p className="text-lg text-dingo-dark/80 text-center md:text-left">
+                  Različiti tipovi brašna mljeveni na kamenom mlinu koji čuva hranjive tvari i prirodni okus žitarica.
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-xl p-6 shadow-md">
+              <div className="mb-8">
+                <h4 className="text-lg font-medium text-dingo-dark mb-4">Odaberite vrstu žitarice:</h4>
+                <div className="overflow-x-auto pb-4">
+                  <ToggleGroup 
+                    type="single" 
+                    value={selectedGrain || ""} 
+                    onValueChange={(value) => setSelectedGrain(value || null)}
+                    className="inline-flex flex-nowrap gap-3 min-w-max"
+                  >
+                    {flourGrains.map((grain) => (
+                      <ToggleGroupItem 
+                        key={grain.id} 
+                        value={grain.id} 
+                        className={cn(
+                          "flex items-center gap-2 border border-gray-200 rounded-full py-1 px-4 transition-all",
+                          "data-[state=on]:bg-dingo-green data-[state=on]:text-white data-[state=on]:border-dingo-green",
+                          "hover:border-dingo-green"
+                        )}
+                      >
+                        <div className="w-6 h-6 rounded-full overflow-hidden flex-shrink-0">
+                          <img 
+                            src={grain.image} 
+                            alt={grain.name} 
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                        <span className="text-sm whitespace-nowrap">{grain.name}</span>
+                      </ToggleGroupItem>
+                    ))}
+                  </ToggleGroup>
+                </div>
+              </div>
+
+              <div className="mb-8">
+                <h4 className="text-lg font-medium text-dingo-dark mb-4">Odaberite tip mljevenja:</h4>
+                <div className="overflow-x-auto pb-4">
+                  <ToggleGroup 
+                    type="single" 
+                    value={selectedProcessType || ""} 
+                    onValueChange={(value) => setSelectedProcessType(value || null)}
+                    className="inline-flex flex-nowrap gap-3"
+                  >
+                    {flourProcessTypes.map((type) => (
+                      <ToggleGroupItem 
+                        key={type.id} 
+                        value={type.id} 
+                        className={cn(
+                          "border border-gray-200 rounded-full py-1 px-4 transition-all",
+                          "data-[state=on]:bg-dingo-green data-[state=on]:text-white data-[state=on]:border-dingo-green",
+                          "hover:border-dingo-green"
+                        )}
+                      >
+                        <span className="text-sm">{type.name}</span>
+                      </ToggleGroupItem>
+                    ))}
+                  </ToggleGroup>
+                </div>
+              </div>
+
+              {selectedGrain && selectedProcessType && (
+                <div className="flex justify-center animate-fadeIn">
+                  <Button 
+                    onClick={handleBuy}
+                    className="bg-dingo-green hover:bg-dingo-green/90 text-white rounded-full"
+                  >
+                    <ShoppingCart className="w-4 h-4 mr-2" />
+                    Dodaj u košaricu
+                  </Button>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {productCategories.slice(1).map((category, categoryIndex) => (
             <div key={categoryIndex} className="space-y-12">
               <div className="flex flex-col md:flex-row items-center md:items-start gap-6 max-w-4xl mx-auto">
                 <div className="flex-shrink-0 w-16 h-16 bg-dingo-green/10 rounded-xl flex items-center justify-center">
