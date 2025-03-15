@@ -1,5 +1,7 @@
-import { Store, ShoppingBag, Globe, MapPin } from "lucide-react";
+
+import { Store, ShoppingBag, Globe, MapPin, Facebook, Search, ExternalLink } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 import { LucideIcon } from "lucide-react";
 
 interface SalesChannel {
@@ -42,9 +44,42 @@ const FindUs = () => {
           <h2 className="text-3xl md:text-4xl font-serif font-semibold text-dingo-dark mb-6">
             Kupite naše proizvode
           </h2>
-          <p className="text-lg text-dingo-dark/80">
+          <p className="text-lg text-dingo-dark/80 mb-10">
             Naši proizvodi dostupni su kroz različite prodajne kanale. Odaberite onaj koji vam najviše odgovara i uživajte u kvalitetnim domaćim proizvodima.
           </p>
+
+          {/* Online channels with buttons */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+            <Button 
+              className="bg-dingo-green hover:bg-dingo-green/90 text-white w-full sm:w-auto flex gap-2"
+              size="lg"
+              onClick={() => window.open('https://dingo.hr', '_blank')}
+            >
+              <ShoppingBag size={20} />
+              <span>Webshop</span>
+              <ExternalLink size={16} className="ml-1" />
+            </Button>
+            
+            <Button 
+              className="bg-[#1877F2] hover:bg-[#1877F2]/90 text-white w-full sm:w-auto flex gap-2"
+              size="lg"
+              onClick={() => window.open('https://www.facebook.com/marketplace', '_blank')}
+            >
+              <Facebook size={20} />
+              <span>Facebook Marketplace</span>
+              <ExternalLink size={16} className="ml-1" />
+            </Button>
+            
+            <Button 
+              className="bg-[#FF5A00] hover:bg-[#FF5A00]/90 text-white w-full sm:w-auto flex gap-2"
+              size="lg"
+              onClick={() => window.open('https://www.njuskalo.hr', '_blank')}
+            >
+              <Search size={20} />
+              <span>Njuškalo.hr</span>
+              <ExternalLink size={16} className="ml-1" />
+            </Button>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
