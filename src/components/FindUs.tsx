@@ -74,39 +74,7 @@ const FindUs = () => {
           ))}
         </div>
 
-        <div className="mt-16 bg-white rounded-xl p-8 shadow-lg">
-          <div className="text-center mb-8">
-            <h3 className="text-2xl font-serif font-semibold text-dingo-dark mb-4">
-              Posjetite naš webshop
-            </h3>
-            <p className="text-lg text-dingo-dark/80 mb-6">
-              Najjednostavniji način za kupnju svih naših proizvoda je putem našeg webshopa s dostavom na vašu adresu.
-            </p>
-            <a 
-              href="https://dingo.hr" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-6 py-3 bg-dingo-green text-white rounded-md font-medium hover:bg-dingo-green/90 transition-colors"
-            >
-              <ShoppingBag className="w-5 h-5 mr-2" />
-              Posjetite webshop
-            </a>
-          </div>
-          
-          <div className="relative w-full h-64 md:h-96 rounded-lg overflow-hidden">
-            <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d178991.09646583367!2d18.530732658266155!3d45.54913323397376!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x475ce7a869728075%3A0x5b8c725621a41195!2sOsijek!5e0!3m2!1sen!2shr!4v1656772143791!5m2!1sen!2shr" 
-              width="100%" 
-              height="100%" 
-              style={{ border: 0 }} 
-              allowFullScreen 
-              loading="lazy" 
-              referrerPolicy="no-referrer-when-downgrade"
-              title="DINGO lokacija"
-              className="absolute inset-0"
-            ></iframe>
-          </div>
-        </div>
+        
       </div>
     </section>
   );
