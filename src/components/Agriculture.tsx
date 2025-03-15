@@ -1,4 +1,4 @@
-import { Wheat, Corn, Apple, Tractor } from "lucide-react";
+import { Wheat, Popcorn, Apple, Tractor } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface CropInfo {
@@ -44,7 +44,7 @@ const Agriculture = () => {
       description: "Uzgajamo nekoliko sorti graha na naš tradicionalni način, pazeći na kvalitetu i okus."
     },
     {
-      icon: Corn,
+      icon: Popcorn,
       name: "Kukuruz kokičar",
       description: "Posebna sorta kukuruza idealna za pripremu kokica, uzgojena bez primjene pesticida."
     },
